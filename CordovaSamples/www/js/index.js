@@ -33,6 +33,8 @@ var app = {
     document.getElementById("removeProjectFromLocalStorage").addEventListener("click", removeProjectFromLocalStorage);
     document.getElementById("getLocalStorageByKey").addEventListener("click", getLocalStorageByKey);
 
+    document.addEventListener("volumeupbutton", callbackFunction, false);
+
     var localStorage = window.localStorage;
   },
   // deviceready Event Handler
@@ -72,6 +74,10 @@ function removeProjectFromLocalStorage() {
 
 function getLocalStorageByKey() {
   console.log(localStorage.key(0));
+}
+
+function callbackFunction() {
+   alert('Volume Up Button is pressed!')
 }
 
 app.initialize();
