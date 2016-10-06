@@ -1,2 +1,13 @@
 Local storage.
-Example with Buttons, just to get going
+Example with Buttons, just to get going.
+
+Goto www folder.
+
+Editing index.html 
+
+Inside the div class="app".
+
+<button id = "setLocalStorage">SET LOCAL STORAGE</button>
+<button id = "showLocalStorage">SHOW LOCAL STORAGE</button>
+<button id = "removeProjectFromLocalStorage">REMOVE PROJECT</button>
+<button id = "getLocalStorageByKey">GET BY KEY</button>
