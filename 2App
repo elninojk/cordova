@@ -3,7 +3,7 @@ Example with Buttons, just to get going.
 
 Goto www folder.
 
-Editing index.html 
+Editing index.html
 
 Inside the div class="app".
 
@@ -11,3 +11,18 @@ Inside the div class="app".
 <button id = "showLocalStorage">SHOW LOCAL STORAGE</button>
 <button id = "removeProjectFromLocalStorage">REMOVE PROJECT</button>
 <button id = "getLocalStorageByKey">GET BY KEY</button>
+
+
+Now adding event listener for the actions. Will be adding this on index.js file
+Event listeners will be functions and we will have to define them as well.
+
+//Adding them inside bindEvents.
+
+document.getElementById("setLocalStorage").addEventListener("click", setLocalStorage);
+document.getElementById("showLocalStorage").addEventListener("click", showLocalStorage);
+document.getElementById("removeProjectFromLocalStorage").addEventListener
+   ("click", removeProjectFromLocalStorage);
+document.getElementById("getLocalStorageByKey").addEventListener
+   ("click", getLocalStorageByKey);
+
+var localStorage = window.localStorage;
