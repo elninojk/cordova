@@ -20,3 +20,6 @@ Slower than native
 Not all api plugins are available
 Not suitable for large apps(if lots of data involved)
 
+For more details
+https://www.tutorialspoint.com/cordova/index.htm
+
