@@ -1,0 +1,85 @@
+This one involves
+android handle.
+
+Add plugin first
+
+
+cordova plugin add cordova-plugin-contacts
+
+
+add buttons in div
+
+<button id = "createContact">ADD CONTACT</button>
+<button id = "findContact">FIND CONTACT</button>
+<button id = "deleteContact">DELETE CONTACT</button>
+
+
+navigator.contacts
+
+is the middleware/android Handler
+
+
+function createContact() {
+  var myContact = navigator.contacts.create({
+    "displayName": "Test User"
+  });
+  myContact.save(contactSuccess, contactError);
+
+  function contactSuccess() {
+    alert("Contact is saved!");
+  }
+
+  function contactError(message) {
+    alert('Failed because: ' + message);
+  }
+
+}
+
+function findContacts() {
+  var options = new ContactFindOptions();
+  options.filter = "";
+  options.multiple = true;
+
+  fields = ["displayName"];
+  navigator.contacts.find(fields, contactfindSuccess, contactfindError, options);
+
+  function contactfindSuccess(contacts) {
+    for (var i = 0; i < contacts.length; i++) {
+      alert("Display Name = " + contacts[i].displayName);
+    }
+  }
+
+  function contactfindError(message) {
+    alert('Failed because: ' + message);
+  }
+
+}
+
+function deleteContact() {
+
+  var options = new ContactFindOptions();
+  options.filter = "Test User";
+  options.multiple = false;
+  fields = ["displayName"];
+
+  navigator.contacts.find(fields, contactfindSuccess, contactfindError, options);
+
+  function contactfindSuccess(contacts) {
+
+    var contact = contacts[0];
+    contact.remove(contactRemoveSuccess, contactRemoveError);
+
+    function contactRemoveSuccess(contact) {
+      alert("Contact Deleted");
+    }
+
+    function contactRemoveError(message) {
+      alert('Failed because: ' + message);
+    }
+  }
+
+  function contactfindError(message) {
+    alert('Failed because: ' + message);
+  }
+
+}

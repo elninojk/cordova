@@ -43,6 +43,11 @@ var app = {
   // function, we must explicitly call 'app.receivedEvent(...);'
   onDeviceReady: function() {
     app.receivedEvent('deviceready');
+    //Adding it here just to make sure that initialization is done.
+    document.getElementById("createContact").addEventListener("click", createContact);
+    document.getElementById("findContact").addEventListener("click", findContact);
+    document.getElementById("deleteContact").addEventListener("click", deleteContact);
+
   },
   // Update DOM on a Received Event
   receivedEvent: function(id) {
@@ -58,16 +63,18 @@ var app = {
 };
 
 function setLocalStorage() {
-   localStorage.setItem("Name", "John");
-   localStorage.setItem("Job", "Developer");
-   localStorage.setItem("Project", "Cordova Project");
+  localStorage.setItem("Name", "John");
+  localStorage.setItem("Job", "Developer");
+  localStorage.setItem("Project", "Cordova Project");
 }
+
 function showLocalStorage() {
-   console.log(localStorage.getItem("Name"));
-   alert(localStorage.getItem("Name"));
-   console.log(localStorage.getItem("Job"));
-   console.log(localStorage.getItem("Project"));
+  console.log(localStorage.getItem("Name"));
+  alert(localStorage.getItem("Name"));
+  console.log(localStorage.getItem("Job"));
+  console.log(localStorage.getItem("Project"));
 }
+
 function removeProjectFromLocalStorage() {
   localStorage.removeItem("Project");
 }
@@ -77,7 +84,72 @@ function getLocalStorageByKey() {
 }
 
 function callbackFunction() {
-   alert('Volume Up Button is pressed!')
+  alert('Volume Up Button is pressed!')
+}
+
+function createContact() {
+  var myContact = navigator.contacts.create({
+    "displayName": "Test User"
+  });
+  myContact.save(contactSuccess, contactError);
+
+  function contactSuccess() {
+    alert("Contact is saved!");
+  }
+
+  function contactError(message) {
+    alert('Failed because: ' + message);
+  }
+
+}
+
+function findContacts() {
+  var options = new ContactFindOptions();
+  options.filter = "";
+  options.multiple = true;
+
+  fields = ["displayName"];
+  navigator.contacts.find(fields, contactfindSuccess, contactfindError, options);
+
+  function contactfindSuccess(contacts) {
+    for (var i = 0; i < contacts.length; i++) {
+      alert("Display Name = " + contacts[i].displayName);
+    }
+  }
+
+  function contactfindError(message) {
+    alert('Failed because: ' + message);
+  }
+
+}
+
+function deleteContact() {
+
+  var options = new ContactFindOptions();
+  options.filter = "Test User";
+  options.multiple = false;
+  fields = ["displayName"];
+
+  navigator.contacts.find(fields, contactfindSuccess, contactfindError, options);
+
+  function contactfindSuccess(contacts) {
+
+    var contact = contacts[0];
+    contact.remove(contactRemoveSuccess, contactRemoveError);
+
+    function contactRemoveSuccess(contact) {
+      alert("Contact Deleted");
+    }
+
+    function contactRemoveError(message) {
+      alert('Failed because: ' + message);
+    }
+  }
+
+  function contactfindError(message) {
+    alert('Failed because: ' + message);
+  }
+
 }
 
 app.initialize();

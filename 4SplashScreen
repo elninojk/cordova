@@ -1,0 +1,4 @@
+To add splash screen.
+
+Since there is no data required from device, seems simple
+cordova plugin add cordova-plugin-splashscreen
